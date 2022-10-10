@@ -1,4 +1,13 @@
-export const configObj = {
+import { fetch } from "cross-fetch";
+
+type ConfigType<R extends string> = {
+  routes: R[];
+  fetchers: {
+    [K in R]?: () => any;
+  };
+};
+
+export const configObj: ConfigType<"/" | "/about" | "/contact"> = {
   routes: ["/", "/about", "/contact"],
   /**
    * fetchers is an object where you can optionally
